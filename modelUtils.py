@@ -48,7 +48,7 @@ class ActionSelection(nn.Module):
 
         # 全局与局部表示融合网络
         self.global_local=nn.Linear(args.node_embedding_size,len(args.node2id))
-        self.alpha=0.5
+        self.alpha=0.2
 
     def forward(self,x):
         return self.layers(x)
@@ -97,7 +97,7 @@ class ActionSelection(nn.Module):
             logists_global = F.sigmoid(self.global_local(global_feature)) * self.args.level_3_mask  #
         # 基于highway MP之后的结果进行预测
         logists_local = F.sigmoid(self.layers(highwayRep).squeeze(-1))*action_space
-        logists=self.alpha * logists_global + (1-self.alpha) * logists_local
+        logists= self.alpha * logists_local+(1-self.alpha) * logists_global
 
         c = Categorical(logists)
         action=c.sample()

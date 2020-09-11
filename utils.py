@@ -254,6 +254,7 @@ def isbrother(label_a,label_b,parent_children_adj):
         brotherFlag=False
     return brotherFlag
 
+
 def generate_graph(parient_child,node2id):
     import networkx as nx
     # 将parient-child中的每条边转换成id
@@ -264,8 +265,9 @@ def generate_graph(parient_child,node2id):
     G.add_edges_from(parient_child)
     print('number of nodes:', G.number_of_nodes())
     print('number of edges:', G.number_of_edges())
-
     return G
+
+
 from collections import Counter
 def get_label_probs(hier_labels,filepath,args):
     leafLabels=[]

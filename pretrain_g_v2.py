@@ -154,8 +154,6 @@ def run_pre_train_step_v2(gen_model,g_batcher,epochs):
             gen_model.optimizer.zero_grad()
             loss.backward()
             gen_model.optimizer.step()
-            del loss
-            torch.cuda.empty_cache()
 
 def run_pre_train_step_batch(gen_model,ehrs, hier_labels):
     ehrs, selected_paths, hier_labels = random_sample(hier_labels, ehrs)
